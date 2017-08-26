@@ -6,9 +6,11 @@
 package company;
 
 /**
- *
+ * created 26/08/2017
  * @author Hristian Vitrychenko
  */
-public class Interface {
+public class Interface 
+{
+    
     
 }

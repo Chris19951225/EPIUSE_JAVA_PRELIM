@@ -38,6 +38,7 @@ public class Worker implements Comparable
     private int employee_num; 
     private double salary; 
     private Roles role; 
+    private Worker reports_to; 
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Constructors and beans    
@@ -49,15 +50,18 @@ public class Worker implements Comparable
         employee_num = 0; 
         salary = 0; 
         role = null; 
+        reports_to = null; 
     }
     
-    public Worker(String first_name, String last_name, int employee_num, double salary, Roles role)
+    public Worker(String first_name, String last_name, Date date_of_birth, int employee_num, double salary, Roles role, Worker reports_to)
     {
         this.first_name = first_name; 
         this.last_name = last_name; 
+        this.date_of_birth = date_of_birth; 
         this.employee_num = employee_num; 
         this.salary = salary; 
         this.role = role; 
+        this.reports_to = reports_to; 
     }
     
     public String getFirstName()
@@ -119,6 +123,16 @@ public class Worker implements Comparable
     {
         this.role = role; 
     }
+    
+    public Worker getReportsTo()
+    {
+        return reports_to; 
+    }
+    
+    public void setReportsTo(Worker reports_to)
+    {
+        this.reports_to = reports_to; 
+    }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Helping methods 
     
@@ -137,6 +151,8 @@ public class Worker implements Comparable
         System.out.println("     Salary: " + salary);
         System.out.println();
         System.out.println("     Role: " + role.toString());
+        System.out.println();
+        System.out.println("     Reports to: " + reports_to.getRole().toString()+ " " + reports_to.getFirstName() + " " + reports_to.getLastName());
         System.out.println();
     }
     

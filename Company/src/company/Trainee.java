@@ -63,4 +63,14 @@ public class Trainee extends Worker
         
         return days; 
     }
+    
+    @Override 
+    public void printWorker()
+    {
+        super.printWorker();
+        System.out.println("     End of training: " + end_of_training.toString()); 
+        System.out.println(); 
+        System.out.println("     Part-time: " + part_time); 
+        System.out.println(); 
+    }
 }

@@ -8,7 +8,7 @@
 <JVMSearchPath>jview</JVMSearchPath>
 <embeddedJar>true</embeddedJar>
 <executableName>Company.exe</executableName>
-<iconLocation>..\..\Pictures\AlienBackground\Green-wallpaper-11.jpg</iconLocation>
+<iconLocation>Green-wallpaper-11.jpg</iconLocation>
 <initialMemoryHeap>-1</initialMemoryHeap>
 <jarLocation>Company.jar</jarLocation>
 <mainClassName>company.Company</mainClassName>

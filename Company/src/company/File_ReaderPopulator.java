@@ -8,6 +8,9 @@ package company;
 import static company.Worker.Roles.MANAGER;
 import static company.Worker.Roles.TRAINEE;
 import static company.Worker.Roles.EMPLOYEE;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +25,7 @@ public class File_ReaderPopulator
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Class Setup       
     private Worker_List list;//List of workers 
-    private final String file_path = "Workers.txt";//File path to text file holding worker information 
+    private final String file_path = "./Workers.txt";//File path to text file holding worker information 
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Constructors and beans 
@@ -71,7 +74,7 @@ public class File_ReaderPopulator
      */
     public int populateList() throws Exception
     {
-        Scanner scanner = new Scanner(file_path);
+        BufferedReader br = new BufferedReader(new FileReader(file_path)); 
         Scanner scanLine;
         String line; 
         String currString; 
@@ -80,9 +83,8 @@ public class File_ReaderPopulator
         DateFormat date_format = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
         
-        while(scanner.hasNextLine())
+        while((line = br.readLine()) != null)
         {
-            line = scanner.nextLine(); 
             scanLine = new Scanner(line); 
             scanLine.useDelimiter(";"); 
             numLines++; 

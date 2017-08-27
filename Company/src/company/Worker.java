@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package company;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -216,6 +217,8 @@ public class Worker implements Comparable
      */
     public void printWorker()
     {
+        DecimalFormat formatDec = new DecimalFormat(".##");
+        
         System.out.println(role.toString() + "'s details:");
         System.out.println(); 
         System.out.println("     Name: " + first_name); 
@@ -226,12 +229,16 @@ public class Worker implements Comparable
         System.out.println(); 
         System.out.println("     Employee number: " + employee_num);
         System.out.println(); 
-        System.out.println("     Salary: " + salary);
+        System.out.println("     Salary: R" + formatDec.format(salary));
         System.out.println();
         System.out.println("     Role: " + role.toString());
         System.out.println();
-        System.out.println("     Reports to: " + reports_to.getRole().toString()+ " " + reports_to.getFirstName() + " " + reports_to.getLastName());
-        System.out.println();
+        
+        if(reports_to != null)
+        {
+            System.out.println("     Reports to: " + reports_to.getRole().toString()+ " " + reports_to.getFirstName() + " " + reports_to.getLastName());
+            System.out.println();
+        }
     }
     
     /**
@@ -251,7 +258,7 @@ public class Worker implements Comparable
      */
     public boolean isOlder(Date date)
     {
-        return this.date_of_birth.compareTo(date) > 0; 
+        return this.date_of_birth.compareTo(date) < 0; 
     }
     
     /**

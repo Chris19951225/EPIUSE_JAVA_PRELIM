@@ -1,0 +1,5 @@
+MANAGER;Bob;Bobberson;25-12-1984;1;40000;null;IT 5-23;20;5;Joseline Becker;University of Pretoria;
+EMPLOYEE;Carl;Carlsson;12-04-1992;2;20000;Bobberson;IT 5-22;10;3;    
+EMPLOYEE;Shannon;Shannonson;25-07-1993;3;18000;Carlsson;IT 5-20;8;2; 
+TRAINEE;Sam;Samson;01-01-1994;4;10000;Shannonson;31-12-2017;true;
+TRAINEE;Anna;Annason;01-23-1994;5;10000;Shannonson;31-12-2017;false; 

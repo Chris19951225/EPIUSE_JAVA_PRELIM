@@ -5,10 +5,13 @@
  */
 package company;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * created 26/08/2017
@@ -194,7 +197,7 @@ public class Worker_List
             if(worker.isOlder(date))
             {
                 older++;
-                System.out.println(worker.getFirstName() + " " + worker.getLastName());
+                worker.printWorker(); 
             }
         }
         
@@ -262,6 +265,172 @@ public class Worker_List
         System.out.println(); 
     }
     
+    public void printHighestSalary()
+    {
+        sortList(); 
+        
+        
+        
+        boolean check = true; 
+        
+        for(int i = 1; i < workers.size(); i++)
+        {
+            if(workers.get(i).getRole().toString().equalsIgnoreCase("Manager"))
+            {
+                System.out.println("Managers: " + workers.get(i).getFirstName() + " " + 
+                        workers.get(i).getLastName() + " - R" + workers.get(i).getSalary());
+                break; 
+            }
+        }
+        System.out.println();
+        
+        for(int i = 1; i < workers.size(); i++)
+        {
+            if(workers.get(i).getRole().toString().equalsIgnoreCase("Employee"))
+            {
+                System.out.println("Employees: " + workers.get(i).getFirstName() + " " + 
+                        workers.get(i).getLastName() + " - R" + workers.get(i).getSalary());
+                break; 
+            }
+        }
+        System.out.println();
+        
+        System.out.println("Trainees: " + workers.get(0).getFirstName() + " " + 
+                        workers.get(0).getLastName() + " - R" + workers.get(0).getSalary());
+        
+        System.out.println(); 
+    }
+    
+    /**
+     * Method to sort the Worker List 
+     */
+    public void sortList()
+    {
+        List<Worker> sorter = new ArrayList<Worker>(); 
+        
+        int totalWorkers = workers.size();
+        int counter = 0; 
+        double nextHighest = -1;  
+        
+        boolean subSort = true; 
+        boolean subSub = true;
+        
+        while(subSort)
+        {
+            Worker newWorker = null; 
+            subSub = true; 
+            
+            for(int i = 0; i < totalWorkers; i++)
+            {
+                if(newWorker == null && workers.get(i).getRole().toString().equalsIgnoreCase("Trainee"))
+                {
+                    newWorker = workers.get(i); 
+                    nextHighest = newWorker.getSalary();  
+                    subSub = false; 
+                }
+                else if(newWorker != null && workers.get(i).compareTo(newWorker) > 0 && workers.get(i).getRole().toString().equalsIgnoreCase("Trainee"))
+                {
+                    newWorker = workers.get(i); 
+                    nextHighest = newWorker.getSalary();  
+                    subSub = false; 
+                }
+            }
+            
+            if(subSub)
+            {
+                subSort = false; 
+               
+            }
+            else
+            {
+                sorter.add(counter, newWorker);
+                workers.remove(newWorker); 
+                nextHighest = -1; 
+                totalWorkers--; 
+                counter++; 
+            }
+        }
+        
+        nextHighest = -1; 
+        subSort = true;  
+        
+        while(subSort)
+        {
+            Worker newWorker = null; 
+            subSub = true; 
+            
+            for(int i = 0; i < totalWorkers; i++)
+            {
+                if(newWorker == null && workers.get(i).getRole().toString().equalsIgnoreCase("Employee"))
+                {
+                    newWorker = workers.get(i); 
+                    nextHighest = newWorker.getSalary();  
+                    subSub = false; 
+                }
+                else if(newWorker != null && workers.get(i).compareTo(newWorker) > 0 && workers.get(i).getRole().toString().equalsIgnoreCase("Employee"))
+                {
+                    newWorker = workers.get(i); 
+                    nextHighest = newWorker.getSalary();  
+                    subSub = false; 
+                }
+            }
+            
+            if(subSub)
+            {
+                subSort = false; 
+            }
+            else
+            {
+                sorter.add(counter, newWorker);
+                workers.remove(newWorker); 
+                nextHighest = -1; 
+                totalWorkers--; 
+                counter++; 
+            }
+        }
+        
+        
+        nextHighest = -1; 
+        subSort = true; 
+        
+        while(subSort)
+        {
+            Worker newWorker = null; 
+            subSub = true; 
+            
+            for(int i = 0; i < totalWorkers; i++)
+            {
+                if(newWorker == null && workers.get(i).getRole().toString().equalsIgnoreCase("Manager"))
+                {
+                    newWorker = workers.get(i); 
+                    nextHighest = newWorker.getSalary();  
+                    subSub = false; 
+                }
+                else if(newWorker != null && workers.get(i).compareTo(newWorker) > 0 && workers.get(i).getRole().toString().equalsIgnoreCase("Manager"))
+                {
+                    newWorker = workers.get(i); 
+                    nextHighest = newWorker.getSalary();  
+                    subSub = false; 
+                }
+            }
+            
+            if(subSub)
+            {
+                subSort = false; 
+            }
+            else
+            {
+                sorter.add(counter, newWorker);
+                workers.remove(newWorker); 
+                nextHighest = -1; 
+                totalWorkers--; 
+                counter++; 
+            }
+        }
+        
+        workers = sorter; 
+    }
+    
     /**
      * Method to get the highest earning manager and his salary 
      * @return highest earning manager and salary string 
@@ -317,7 +486,7 @@ public class Worker_List
         
         for(Worker worker : workers)
         {
-            if(worker.getRole().toString().equalsIgnoreCase("Employee"))
+            if(worker.getRole().toString().equalsIgnoreCase("Employees"))
             {
                 currEmployee = worker; 
                 
@@ -359,7 +528,7 @@ public class Worker_List
         
         for(Worker worker : workers)
         {
-            if(worker.getRole().toString().equalsIgnoreCase("Trainee"))
+            if(worker.getRole().toString().equalsIgnoreCase("Trainees"))
             {
                 currTrainee = worker; 
                 
@@ -456,5 +625,102 @@ public class Worker_List
         {
             System.out.println(worker.getFirstName() + " " + worker.getLastName()); 
         }
+    }
+    
+    /**
+     * Method to print Worker from list with the given full name
+     * @param worker the full name of the Worker to be printed 
+     * @return whether a worker with given full name exists in the Worker List
+     */
+    public boolean printWorker(String worker)
+    {
+        Scanner scanLine = new Scanner(worker); 
+        scanLine.useDelimiter(" ");
+        
+        boolean approved = false; 
+        String firstName = "";
+        String surname = ""; 
+        
+        for(int i = 0; i < 2; i++)
+        {
+            if(scanLine.hasNext() && i == 0)
+            {
+                firstName = scanLine.next(); 
+            }
+            else if(scanLine.hasNext() && i == 1)
+            {
+                surname = scanLine.next();
+            } 
+        }
+       
+        for(Worker work : workers)
+        {
+            if(work.getLastName().equalsIgnoreCase(surname) && work.getFirstName().equalsIgnoreCase(firstName))
+            { 
+                approved = true; 
+                work.printWorker(); 
+            }
+        }
+        
+        if(!approved)
+        {
+            System.out.println("\nSorry, no one is named that here.\n"); 
+        }
+        
+        return approved; 
+    }
+    
+    /**
+     * Method to print Worker based on first name 
+     * @param firstName name of Worker to be printed 
+     * @return whether a Worker with the given first name was found in Worker List 
+     */
+    public boolean printWorkerByFirstName(String firstName)
+    {
+ 
+        boolean approved = false; 
+
+        for(Worker work : workers)
+        {
+            if(work.getFirstName().equalsIgnoreCase(firstName))
+            { 
+                approved = true; 
+                work.printWorker(); 
+            }
+        }
+        
+        if(!approved)
+        {
+            System.out.println("\nSorry, no one is named that here.\n"); 
+        }
+        
+        return approved; 
+    }
+    
+    /**
+     * Method to print Worker based on last name 
+     * @param surname of the Worker to be printed 
+     * @return whether a Worker with the given last name was found in Worker List
+     */
+    public boolean printWorkerByLastName(String surname)
+    {
+ 
+        boolean approved = false; 
+
+        for(Worker work : workers)
+        {
+            if(work.getLastName().equalsIgnoreCase(surname))
+            { 
+                approved = true; 
+                work.printWorker(); 
+            }
+        }
+        
+        if(!approved)
+        {
+            System.out.println("\nSorry, no one is named that here.\n"); 
+        }
+        
+        return approved; 
     }
 }

@@ -58,6 +58,119 @@ public class Interface
 //Helping methods
     
     /**
+     * Method to print Worker based on full name
+     */
+    public void printByFullName()
+    {
+        Scanner scanner = new Scanner(System.in); 
+        boolean stop = false;
+        boolean approved = false; 
+        String fullName; 
+        
+        while(!stop)
+        {
+            System.out.println("Please type in the full name of the employee who's record you would like to see: "); 
+            
+            if(!scanner.hasNextLine())
+            {
+                 System.out.println("Please type in a full name.");
+                 approved = false; 
+            }
+            else
+            {
+                fullName = scanner.nextLine();
+                approved = list.printWorker(fullName);
+            }
+            
+            if(!approved)
+            {
+                System.out.println("Here are all the people available to list: "); 
+                list.printAllWorkerNames();
+                System.out.println(); 
+            }
+            else
+            {
+                stop = true; 
+            }
+        }
+    }
+    
+    /**
+     * Method to print Worker based on first name 
+     */
+    public void printByFirstName()
+    {
+        Scanner scanner = new Scanner(System.in); 
+        boolean stop = false;
+        boolean approved = false; 
+        String firstName; 
+        
+        while(!stop)
+        {
+            System.out.println("Please type in the first name of the employee who's record you would like to see: "); 
+            
+            if(!scanner.hasNextLine())
+            {
+                 System.out.println("Please type in a first name.");
+                 approved = false; 
+            }
+            else
+            {
+                firstName = scanner.nextLine();
+                approved = list.printWorkerByFirstName(firstName);
+            }
+            
+            if(!approved)
+            {
+                System.out.println("Here are all the people available to list: "); 
+                list.printAllWorkerNames();
+                System.out.println(); 
+            }
+            else
+            {
+                stop = true; 
+            }
+        }
+    }
+    
+    /**
+     * Method to print Worker based on last name
+     */
+    public void printByLastName()
+    {
+        Scanner scanner = new Scanner(System.in); 
+        boolean stop = false;
+        boolean approved = false; 
+        String surname; 
+        
+        while(!stop)
+        {
+            System.out.println("Please type in the last name of the employee who's record you would like to see: "); 
+            
+            if(!scanner.hasNextLine())
+            {
+                 System.out.println("Please type in a last name.");
+                 approved = false; 
+            }
+            else
+            {
+                surname = scanner.nextLine();
+                approved = list.printWorkerByLastName(surname);
+            }
+            
+            if(!approved)
+            {
+                System.out.println("Here are all the people available to list: "); 
+                list.printAllWorkerNames();
+                System.out.println(); 
+            }
+            else
+            {
+                stop = true; 
+            }
+        }
+    }
+    /**
      * Method for choice 2 which is to list employees older than a specified date 
      * @throws ParseException in case date given cannot be parsed
      */
@@ -79,7 +192,7 @@ public class Interface
 
             if(!match.find())
             {
-                System.out.println("Please input the date in the correct format (dd-MM-yyyy"); 
+                System.out.println("Please input the date in the correct format (dd-MM-yyyy):"); 
             }
             else
             {
@@ -92,22 +205,6 @@ public class Interface
         }
     }
     
-    /**
-     * Method for choice 4 which is to list highest earner in each tier 
-     */
-    public void choice4() 
-    {
-        String curr = ""; 
-        curr = list.getHighestEarnerManagers(); 
-        System.out.println(curr); 
-        System.out.println(); 
-        curr = list.getHighestEarnerEmployees(); 
-        System.out.println(curr);
-        System.out.println(); 
-        curr = list.getHighestEarnerTrainees(); 
-        System.out.println(curr); 
-        System.out.println(); 
-    }
     
     /**
      * Method for choice 5 which is to add a new employee
@@ -379,6 +476,7 @@ public class Interface
             if(newWorker!=null)
             {
                  list.addWorker(newWorker);
+                 System.out.println("Worker has been added to the list.\n");
             }
     }
     
@@ -394,7 +492,7 @@ public class Interface
         
         while(loop)
         {
-            System.out.println("Please type in either the last name or employee number of the worker you wish to delete"); 
+            System.out.println("Please type in either the last name or employee number of the worker you wish to delete:"); 
             reader = scanner.nextLine(); 
 
             if(reader.equalsIgnoreCase("quit"))
@@ -455,7 +553,7 @@ public class Interface
         {
             System.out.println("Preliminary Assignment operations: ");
             System.out.println(); 
-            System.out.println("    1. Print employee records");
+            System.out.println("    1. Print employee record");
             System.out.println("    2. List employees older than a date");
             System.out.println("    3. Print full organizational structure");
             System.out.println("    4. Print highest earning workers per tier");
@@ -464,10 +562,14 @@ public class Interface
             System.out.println();
             System.out.println("    5. Add worker to current list (note, this won't update the text file)");
             System.out.println("    6. Delete worker from current list (note, this won't update the text file)");
-            System.out.println("    7. List all managers in the company");
-            System.out.println("    8. List all the employees in the company");
-            System.out.println("    9. List all trainees in the company");
-            System.out.println("    10. Quit Compnay program");
+            System.out.println("    7. Print an employee by first name");
+            System.out.println("    8. Print an employee by second name");
+            System.out.println("    9. List all managers in the company");
+            System.out.println("    10. List all the employees in the company");
+            System.out.println("    11. List all trainees in the company");
+            System.out.println("    12. Print all employee records");
+            System.out.println("    13. Quit Compnay program");
+            
             System.out.println("Please type in your choice (number): "); 
             
             readLine = scanner.nextLine();  
@@ -481,9 +583,9 @@ public class Interface
                 System.out.println("Please input the number of your choice (has to be a number)"); 
             }
             
-            if(choice < 1 || choice > 10)
+            if(choice < 1 || choice > 13)
             {
-                System.out.println("Please input a number in the range of choices (1-10)"); 
+                System.out.println("Please input a number in the range of choices (1-13)"); 
             }
             else
             {
@@ -492,7 +594,7 @@ public class Interface
                 switch(choice)
                 {
                     case 1: 
-                        list.printAllWorkers();
+                        printByFullName(); 
                         break;
                     case 2: 
                         choice2();
@@ -501,7 +603,7 @@ public class Interface
                         list.printHierarchy();
                         break; 
                     case 4: 
-                        choice4();
+                        list.printHighestSalary();
                         break; 
                     case 5: 
                         choice5(); 
@@ -510,15 +612,24 @@ public class Interface
                         choice6(); 
                         break; 
                     case 7: 
-                        list.printAllManagers();
+                        printByFirstName();
                         break; 
                     case 8: 
-                        list.printAllEmployees();
+                        printByLastName();
                         break; 
                     case 9: 
-                        list.printAllTrainees();
+                        list.printAllManagers();
                         break; 
                     case 10: 
+                        list.printAllEmployees();
+                        break;     
+                    case 11: 
+                        list.printAllTrainees();
+                        break; 
+                    case 12:
+                        list.printAllWorkers();
+                        break;
+                    case 13: 
                         running = false; 
                         break; 
                     default: 
